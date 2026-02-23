@@ -468,14 +468,35 @@
             display: none;
         }
 
-        .section-head {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
+        .header-top {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .toolbar {
+            gap: 4px;
+            overflow-x: auto;
+            max-width: 60%;
+            justify-content: flex-end;
+            scrollbar-width: none;
+        }
+
+        .toolbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        button {
+            padding: 8px 10px;
+        }
+
+        button span {
+            display: none;
         }
 
         .bar-bg {
-            width: 100%;
+            display: none;
         }
 
         table,
@@ -625,86 +646,66 @@
     </a>
 
     <header>
-        <div class="wrap">
-            <div class="header-top">
-                <a href="https://www.osipov.uk/" class="brand-logo">iO <b>consulting</b></a>
-                <div class="maturity-grade" id="globalMaturityGrade">Assessing...</div>
+        <div class="wrap" style="padding: 12px 24px;">
+            <div class="header-top" style="margin-bottom: 0;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <a href="https://www.osipov.uk/" class="brand-logo">iO <b>consulting</b></a>
+                    <div class="maturity-grade" id="globalMaturityGrade">Assessing...</div>
+                </div>
+                <div class="toolbar" style="margin-top: 0;">
+                    <button class="primary" onclick="loadSampleData()" title="Load Sample Data">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Sample</span>
+                    </button>
+                    <button onclick="exportCSV()" title="Export CSV">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span>Export</span>
+                    </button>
+                    <button onclick="copyExecutiveSummary()" title="Copy Executive Summary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>Summary</span>
+                    </button>
+                    <button onclick="exportToAI()" title="Export to AI">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        <span>AI</span>
+                    </button>
+                    <button onclick="window.print()" title="Print PDF">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <h1>Project Maturity Tracker</h1>
-            <p style="color: var(--muted); margin: -8px 0 24px 0; font-size: 15px;">The "Gold Standard" template for
-                rigorous project delivery and governance.</p>
-
-            <div class="toolbar">
-                <button class="primary" onclick="loadSampleData()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Load Sample Data</span>
-                </button>
-                <button onclick="exportCSV()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                    <span>Export CSV</span>
-                </button>
-                <label class="chip" style="cursor: pointer;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Import CSV</span>
-                    <input id="importCsv" type="file" accept=".csv" style="display:none" onchange="importCSV(event)">
-                </label>
-                <button onclick="window.open('README.md', '_blank')">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                    <span>View Manual</span>
-                </button>
-                <button onclick="window.print()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                        <rect x="6" y="14" width="12" height="8"></rect>
-                    </svg>
-                    <span>Print PDF</span>
-                </button>
-                <button onclick="copyExecutiveSummary()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    <span>Copy Exec Summary</span>
-                </button>
-                <button onclick="exportToAI()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
-                    <span>Export to AI</span>
-                </button>
-                <button style="color: var(--bad);" onclick="resetData()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                    <span>Clear Data</span>
-                </button>
-            </div>
-
-            <div class="kpi-container" id="overallKpis"></div>
         </div>
     </header>
 
     <main class="wrap">
+        <div style="margin-bottom: 32px; margin-top: 10px;">
+            <h1>Project Maturity Tracker</h1>
+            <p style="color: var(--muted); margin-top: -8px; font-size: 15px;">The "Gold Standard" template for rigorous
+                project delivery and governance.</p>
+            <div class="kpi-container" id="overallKpis"></div>
+        </div>
         <div class="sections" id="sections"></div>
     </main>
 
