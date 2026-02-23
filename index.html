@@ -1,0 +1,1115 @@
+<title>Project Maturity Tracker — iO consulting (Premium Asset)</title>
+<meta name="description"
+    content="A professional, single-file Project Maturity Tracker for rigorous project delivery and governance. Developed by iO consulting.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.osipov.uk/pm-tracker">
+<meta property="og:title" content="Project Maturity Tracker — iO consulting">
+<meta property="og:description"
+    content="Rigorous project delivery and governance tool. Portable, professional, and AI-optimized.">
+<meta property="og:image" content="https://www.osipov.uk/social-preview.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.osipov.uk/pm-tracker">
+<meta property="twitter:title" content="Project Maturity Tracker — iO consulting">
+<meta property="twitter:description"
+    content="Rigorous project delivery and governance tool. Portable, professional, and AI-optimized.">
+<meta property="twitter:image" content="https://www.osipov.uk/social-preview.png">
+
+<!-- JSON-LD (Schema.org) for AI/Google -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Project Maturity Tracker",
+      "operatingSystem": "Web Browser",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "iO consulting",
+        "url": "https://www.osipov.uk"
+      },
+      "description": "A high-end Project Maturity Tracker built to standardize project delivery across enterprise environments."
+    }
+    </script>
+<style>
+    :root {
+        --bg: #09090b;
+        --bg-secondary: #18181b;
+        --card: #18181b;
+        --card2: #121215;
+        --fg: #fafafa;
+        --muted: #a1a1aa;
+        --primary: #c4a66b;
+        --primary-hover: #d4b87b;
+        --ok: #22c55e;
+        --warn: #f59e0b;
+        --bad: #ef4444;
+        --border: #27272a;
+        --input-bg: #18181b;
+        --radius: 12px;
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Smoothing and premium touches */
+    * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(9, 9, 11, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 24px
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .brand-logo {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        color: var(--fg);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .brand-logo b {
+        color: var(--primary);
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Toolbar improvements */
+    .toolbar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 16px;
+    }
+
+    button,
+    .chip {
+        background: var(--bg-secondary);
+        color: var(--fg);
+        border: 1px solid var(--border);
+        padding: 10px 18px;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    button:hover {
+        background: var(--border);
+        border-color: var(--muted);
+        transform: translateY(-1px);
+    }
+
+    button.primary {
+        background: var(--primary);
+        color: var(--bg);
+        border: none;
+    }
+
+    button.primary:hover {
+        background: var(--primary-hover);
+        box-shadow: 0 0 20px rgba(196, 166, 107, 0.2);
+    }
+
+    .cta-sticky {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1000;
+        background: var(--primary);
+        color: var(--bg);
+        padding: 14px 24px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 10px 25px -5px rgba(196, 166, 107, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+    }
+
+    .cta-sticky:hover {
+        transform: scale(1.05) translateY(-4px);
+        box-shadow: 0 15px 30px -5px rgba(196, 166, 107, 0.5);
+    }
+
+    .kpi-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .kpi-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .kpi-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--primary);
+        opacity: 0.5;
+    }
+
+    .kpi-label {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+    }
+
+    .kpi-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--fg);
+    }
+
+    .kpi-value i {
+        color: var(--primary);
+        font-style: normal;
+    }
+
+    /* Scoring Indicator */
+    .maturity-grade {
+        font-size: 14px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 99px;
+        background: rgba(34, 197, 94, 0.1);
+        color: var(--ok);
+        border: 1px solid var(--ok);
+    }
+
+    .maturity-grade.platinum {
+        color: #e5e7eb;
+        border-color: #e5e7eb;
+        background: rgba(229, 231, 235, 0.1);
+    }
+
+    .maturity-grade.gold {
+        color: #fbbf24;
+        border-color: #fbbf24;
+        background: rgba(251, 191, 36, 0.1);
+    }
+
+    .maturity-grade.silver {
+        color: #9ca3af;
+        border-color: #9ca3af;
+        background: rgba(156, 163, 175, 0.1);
+    }
+
+    .maturity-grade.bronze {
+        color: #d97706;
+        border-color: #d97706;
+        background: rgba(217, 119, 6, 0.1);
+    }
+
+    .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin: 40px 0
+    }
+
+    .section {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        transition: all 0.3s;
+        box-shadow: var(--shadow);
+    }
+
+    .section:hover {
+        border-color: var(--primary);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-head {
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .section-head h2 {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 700;
+        color: var(--fg);
+    }
+
+    .progress-mini {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .bar-bg {
+        width: 120px;
+        height: 6px;
+        background: var(--bg);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .bar-fill {
+        height: 100%;
+        background: var(--primary);
+        transition: width 0.5s ease;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    th {
+        background: var(--bg);
+        padding: 12px 24px;
+        text-align: left;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+    }
+
+    td {
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--border);
+        transition: background 0.2s;
+    }
+
+    tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 14px;
+        color: var(--fg);
+        font-family: inherit;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(196, 166, 107, 0.1);
+    }
+
+    .checkbox-custom {
+        width: 20px;
+        height: 20px;
+        appearance: none;
+        background: var(--bg);
+        border: 2px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s;
+    }
+
+    .checkbox-custom:checked {
+        background: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .checkbox-custom:checked::after {
+        content: '✓';
+        color: var(--bg);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 800;
+        font-size: 12px;
+    }
+
+    footer {
+        border-top: 1px solid var(--border);
+        padding: 60px 0;
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+
+    .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+
+    .maturity-gauge-wrap {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .gauge-label {
+        margin-top: 12px;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .wrap {
+            padding: 16px;
+        }
+
+        .kpi-container {
+            grid-template-columns: 1fr;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .toolbar {
+            gap: 8px;
+        }
+
+        button span {
+            display: none;
+        }
+
+        .section-head {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .bar-bg {
+            width: 100%;
+        }
+
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        th {
+            display: none;
+        }
+
+        td {
+            padding: 12px 0;
+            border: none;
+        }
+
+        td::before {
+            content: attr(data-label);
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+    }
+
+    /* Risk Indicators */
+    tr.at-risk td {
+        background: rgba(245, 158, 11, 0.08);
+    }
+
+    tr.overdue td {
+        background: rgba(239, 68, 68, 0.08);
+    }
+
+    tr.at-risk input,
+    tr.at-risk textarea {
+        border-color: rgba(245, 158, 11, 0.5);
+    }
+
+    tr.overdue input,
+    tr.overdue textarea {
+        border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    /* Print & Report Styling */
+    @media print {
+        @page {
+            margin: 15mm;
+        }
+
+        body {
+            background: #fff;
+            color: #000;
+        }
+
+        .toolbar,
+        .cta-sticky,
+        .adder,
+        button,
+        .progress-mini {
+            display: none !important;
+        }
+
+        header {
+            background: transparent;
+            border-bottom: 2px solid #000;
+            position: static;
+            padding-bottom: 20px;
+        }
+
+        .brand-logo,
+        h1,
+        .kpi-value,
+        .kpi-label,
+        .section-head h2 {
+            color: #000 !important;
+            -webkit-text-fill-color: #000;
+        }
+
+        .section {
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: none;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+
+        .section-head {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        table,
+        th,
+        td {
+            border-color: #eee;
+        }
+
+        th {
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            border: none;
+            background: transparent;
+            padding: 0;
+            color: #000;
+            resize: none;
+            overflow: hidden;
+            outline: none;
+            box-shadow: none;
+        }
+
+        textarea {
+            min-height: auto !important;
+            height: auto !important;
+            white-space: pre-wrap;
+        }
+
+        .checkbox-custom {
+            border-color: #000;
+        }
+
+        .checkbox-custom:checked::after {
+            color: #000;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <a href="https://www.osipov.uk/" class="cta-sticky">
+        <span>Expert Audit / Consulting</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+    </a>
+
+    <header>
+        <div class="wrap">
+            <div class="header-top">
+                <a href="https://www.osipov.uk/" class="brand-logo">iO <b>consulting</b></a>
+                <div class="maturity-grade" id="globalMaturityGrade">Assessing...</div>
+            </div>
+            <h1>Project Maturity Tracker</h1>
+            <p style="color: var(--muted); margin: -8px 0 24px 0; font-size: 15px;">The "Gold Standard" template for
+                rigorous project delivery and governance.</p>
+
+            <div class="toolbar">
+                <button class="primary" onclick="loadSampleData()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Load Sample Data</span>
+                </button>
+                <button onclick="exportCSV()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span>Export CSV</span>
+                </button>
+                <label class="chip" style="cursor: pointer;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Import CSV</span>
+                    <input id="importCsv" type="file" accept=".csv" style="display:none" onchange="importCSV(event)">
+                </label>
+                <button onclick="window.open('README.md', '_blank')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>View Manual</span>
+                </button>
+                <button onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    <span>Print PDF</span>
+                </button>
+                <button onclick="copyExecutiveSummary()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>Copy Exec Summary</span>
+                </button>
+                <button onclick="exportToAI()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    <span>Export to AI</span>
+                </button>
+                <button style="color: var(--bad);" onclick="resetData()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Clear Data</span>
+                </button>
+            </div>
+
+            <div class="kpi-container" id="overallKpis"></div>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <div class="sections" id="sections"></div>
+    </main>
+
+    <footer class="wrap">
+        <div class="footer-brand">iO <b>consulting</b></div>
+        <div class="footer-links">
+            <a href="https://www.osipov.uk">Website</a>
+            <a href="mailto:consult@osipov.uk">Contact</a>
+            <a href="https://www.osipov.uk/services">Expert Audit</a>
+        </div>
+        <p style="opacity: 0.6;">© 2026 iO consulting. All data is processed locally within your browser.</p>
+    </footer>
+
+    <script>
+        const STORE_KEY = 'io_pm_tracker_v1';
+
+        const TEMPLATE = [
+            {
+                name: '1. Preparation & Governance', items: [
+                    'Sponsor & SteerCo confirmed', 'Project Charter approved',
+                    'Roles & Responsibilities (RACI) defined', 'Communication Plan (Cadence) set',
+                    'Budget allocation & tracking established', 'Change Control process agreed'
+                ]
+            },
+            {
+                name: '2. Discovery & Requirements', items: [
+                    'Stakeholder interviews completed', 'Business Requirement Document (BRD) frozen',
+                    'Success Metrics (KPIs) defined', 'High-level Roadmap approved',
+                    'Constraint & Dependency Log active', 'Process Mapping (As-Is / To-Be) complete'
+                ]
+            },
+            {
+                name: '3. Technical & Architecture', items: [
+                    'Architecture Decision Records (ADRs) started', 'System Design Document (SDD) drafted',
+                    'Security & Compliance (DPIA) review', 'Environment Strategy (Dev/Staging/Prod)',
+                    'Integration Map & API Specs defined', 'Tooling/Stack selection finalized'
+                ]
+            },
+            {
+                name: '4. Implementation & Execution', items: [
+                    'Backlog groomed & prioritized', 'Sprint 0 foundation complete',
+                    'Core functionality development', 'Unit & Integration tests passing',
+                    'Regular Stakeholder demos', 'Progress reporting updated weekly'
+                ]
+            },
+            {
+                name: '5. Quality & Launch Readiness', items: [
+                    'UAT scripts & plan signed off', 'UAT execution & defect fixing',
+                    'Operational Runbook drafted', 'Training materials & User Guides',
+                    'Go-Live Checklist compiled', 'Post-Launch Support Plan active'
+                ]
+            }
+        ];
+
+        let state = loadState() || seedState();
+
+        function seedState() {
+            const s = {
+                sections: TEMPLATE.map(sec => ({
+                    name: sec.name,
+                    items: sec.items.map(title => ({
+                        title, owner: '', due: '', notes: '', done: false, completedAt: ''
+                    }))
+                }))
+            };
+            saveState(s); return s;
+        }
+
+        function loadState() {
+            try { return JSON.parse(localStorage.getItem(STORE_KEY)); } catch (e) { return null; }
+        }
+
+        function saveState(s) {
+            localStorage.setItem(STORE_KEY, JSON.stringify(s));
+            updateOverallMaturity();
+        }
+
+        function resetData() {
+            if (confirm('Permanently clear all saved progress?')) {
+                localStorage.removeItem(STORE_KEY);
+                location.reload();
+            }
+        }
+
+        function loadSampleData() {
+            const sample = {
+                sections: TEMPLATE.map((sec, si) => ({
+                    name: sec.name,
+                    items: sec.items.map((title, ii) => {
+                        const isDone = (si < 2 || (si === 2 && ii < 3));
+                        return {
+                            title,
+                            owner: 'iO consulting',
+                            due: new Date(Date.now() + (si * 7 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10),
+                            notes: isDone ? 'Completed according to standard ISO 21500 guidelines.' : 'In progress. Target date is tracked.',
+                            done: isDone,
+                            completedAt: isDone ? new Date().toISOString().slice(0, 10) : ''
+                        };
+                    })
+                }))
+            };
+            state = sample;
+            saveState(state);
+            render();
+        }
+
+        function updateOverallMaturity() {
+            let total = 0, done = 0;
+            state.sections.forEach(sec => {
+                total += sec.items.length;
+                done += sec.items.filter(it => it.done).length;
+            });
+            const pct = total ? Math.round(done * 100 / total) : 0;
+            const el = document.getElementById('globalMaturityGrade');
+
+            if (pct >= 95) { el.className = 'maturity-grade platinum'; el.innerText = 'Maturity: PLATINUM'; }
+            else if (pct >= 80) { el.className = 'maturity-grade gold'; el.innerText = 'Maturity: GOLD'; }
+            else if (pct >= 60) { el.className = 'maturity-grade silver'; el.innerText = 'Maturity: SILVER'; }
+            else if (pct >= 30) { el.className = 'maturity-grade bronze'; el.innerText = 'Maturity: BRONZE'; }
+            else { el.className = 'maturity-grade'; el.innerText = 'Maturity: SEEDLING'; }
+        }
+
+        let showOpenOnly = false;
+
+        function toggleFilter() {
+            showOpenOnly = !showOpenOnly;
+            const btn = document.getElementById('toggleFilterBtn');
+            if (showOpenOnly) {
+                btn.classList.add('active');
+                btn.innerText = 'Show open items only (ON)';
+            } else {
+                btn.classList.remove('active');
+                btn.innerText = 'Show open items only';
+            }
+            render();
+        }
+
+        function render() {
+            const container = document.getElementById('sections');
+            container.innerHTML = '';
+            let total = 0, done = 0;
+
+            state.sections.forEach((sec, si) => {
+                const secTotal = sec.items.length;
+                const secDone = sec.items.filter(it => it.done).length;
+                total += secTotal; done += secDone;
+                const pct = secTotal ? Math.round(secDone * 100 / secTotal) : 0;
+
+                const card = document.createElement('div'); card.className = 'section';
+
+                const head = document.createElement('div'); head.className = 'section-head';
+                head.innerHTML = `
+                    <h2>${sec.name}</h2>
+                    <div class="progress-mini">
+                        <div class="bar-bg"><div class="bar-fill" style="width: ${pct}%"></div></div>
+                        <span style="font-size: 13px; font-weight: 600; color: var(--muted);"> ${pct}%</span>
+                    </div>
+                `;
+                card.appendChild(head);
+
+                const tableWrap = document.createElement('div');
+                tableWrap.style.overflowX = 'auto';
+
+                const tbl = document.createElement('table');
+                tbl.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Done</th>
+                            <th>Deliverable</th>
+                            <th style="width: 150px;">Owner</th>
+                            <th style="width: 150px;">Due</th>
+                            <th>Notes / Links</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                const tbody = tbl.querySelector('tbody');
+
+                sec.items.forEach((it, ii) => {
+                    const tr = document.createElement('tr');
+
+                    if (!it.done && it.due) {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const dueDate = new Date(it.due);
+                        const days = (dueDate - today) / (1000 * 60 * 60 * 24);
+                        if (days < 0) { tr.className = 'overdue'; }
+                        else if (days <= 2) { tr.className = 'at-risk'; }
+                    }
+
+                    const tdDone = document.createElement('td'); tdDone.setAttribute('data-label', 'Done');
+                    const cb = document.createElement('input');
+                    cb.type = 'checkbox'; cb.className = 'checkbox-custom'; cb.checked = !!it.done;
+                    cb.onchange = () => {
+                        it.done = cb.checked;
+                        it.completedAt = it.done ? new Date().toISOString().slice(0, 10) : '';
+                        saveState(state); render();
+                    };
+                    tdDone.appendChild(cb);
+
+                    const tdTitle = document.createElement('td'); tdTitle.setAttribute('data-label', 'Deliverable');
+                    const title = document.createElement('textarea');
+                    title.style.minHeight = '40px'; title.value = it.title;
+                    title.onchange = () => { it.title = title.value; saveState(state); };
+                    tdTitle.appendChild(title);
+
+                    const tdOwner = document.createElement('td'); tdOwner.setAttribute('data-label', 'Owner');
+                    const owner = document.createElement('input');
+                    owner.type = 'text'; owner.placeholder = 'Assignee'; owner.value = it.owner || '';
+                    owner.onchange = () => { it.owner = owner.value; saveState(state); };
+                    tdOwner.appendChild(owner);
+
+                    const tdDue = document.createElement('td'); tdDue.setAttribute('data-label', 'Due');
+                    const due = document.createElement('input');
+                    due.type = 'date'; due.value = it.due || '';
+                    due.onchange = () => { it.due = due.value; saveState(state); };
+                    tdDue.appendChild(due);
+
+                    const tdNotes = document.createElement('td'); tdNotes.setAttribute('data-label', 'Notes');
+                    const notes = document.createElement('textarea');
+                    notes.style.minHeight = '40px'; notes.placeholder = 'Evidence, links...'; notes.value = it.notes || '';
+                    notes.onchange = () => { it.notes = notes.value; saveState(state); };
+                    tdNotes.appendChild(notes);
+
+                    tr.append(tdDone, tdTitle, tdOwner, tdDue, tdNotes);
+                    tbody.appendChild(tr);
+                });
+
+                const adder = document.createElement('div'); adder.className = 'adder';
+                adder.innerHTML = `
+      <input type="text" placeholder="Add deliverable… (press Add)" />
+      <button class="secondary">Add</button>
+    `;
+                const addInput = adder.querySelector('input');
+                const addBtn = adder.querySelector('button');
+                addBtn.onclick = () => {
+                    const val = addInput.value.trim(); if (!val) return;
+                    sec.items.push({ title: val, owner: '', due: '', notes: '', done: false, completedAt: '' });
+                    addInput.value = ''; saveState(state); render();
+                };
+
+                tableWrap.appendChild(tbl);
+                card.appendChild(tableWrap);
+                card.appendChild(adder); // Add the adder back
+                container.appendChild(card);
+            });
+
+            // Update KPIs
+            const kpiContainer = document.getElementById('overallKpis');
+            const overallPct = total ? Math.round(done * 100 / total) : 0;
+            kpiContainer.innerHTML = `
+                <div class="kpi-card">
+                    <div class="kpi-label">Project Progress</div>
+                    <div class="kpi-value">${overallPct}<i>%</i></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Deliverables</div>
+                    <div class="kpi-value">${done} <i>/ ${total}</i></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Open Actions</div>
+                    <div class="kpi-value">${total - done}</div>
+                </div>
+            `;
+            updateOverallMaturity();
+        }
+
+        // CSV Helper
+        function exportCSV() {
+            const rows = [['Section', 'Deliverable', 'Owner', 'Due', 'Done', 'Notes']];
+            state.sections.forEach(sec => {
+                sec.items.forEach(it => {
+                    rows.push([
+                        sec.name, it.title, it.owner || '', it.due || '', it.done ? 'Yes' : 'No', it.notes || ''
+                    ]);
+                });
+            });
+            const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "project_maturity_tracker.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        function importCSV(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (ex) {
+                const text = ex.target.result;
+                // Simple parser (could be improved for robust CSV handling)
+                const lines = text.split('\n').slice(1);
+                lines.forEach(line => {
+                    const [secName, title, owner, due, done, notes] = line.split(',');
+                    if (!secName) return;
+                    const section = state.sections.find(s => s.name === secName);
+                    if (section) {
+                        const item = section.items.find(i => i.title === title);
+                        if (item) {
+                            item.owner = owner;
+                            item.due = due;
+                            item.done = (done === 'Yes');
+                            item.notes = notes;
+                        }
+                    }
+                });
+                saveState(state);
+                render();
+            };
+            reader.readAsText(file);
+        }
+
+        function parseCSV(text) {
+            const rows = []; let cur = [], i = 0, s = text, len = s.length, inQ = false, val = '';
+            while (i < len) {
+                const c = s[i];
+                if (inQ) {
+                    if (c === '"') {
+                        if (s[i + 1] === '"') { val += '"'; i++; }
+                        else { inQ = false; }
+                    } else val += c;
+                } else {
+                    if (c === ',') { cur.push(val); val = ''; }
+                    else if (c === '"') { inQ = true; }
+                    else if (c === '\n' || c === '\r') {
+                        if (c === '\r' && s[i + 1] === '\n') i++;
+                        cur.push(val); rows.push(cur); cur = []; val = '';
+                    } else val += c;
+                }
+                i++;
+            }
+            if (val.length > 0 || cur.length) { cur.push(val); rows.push(cur); }
+            return rows;
+        }
+
+        function download(filename, content, mime) {
+            const blob = new Blob([content], { type: mime || 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = filename; a.click();
+            setTimeout(() => URL.revokeObjectURL(url), 500);
+        }
+
+        function getMaturityText(pct) {
+            if (pct >= 95) return 'PLATINUM';
+            if (pct >= 80) return 'GOLD';
+            if (pct >= 60) return 'SILVER';
+            if (pct >= 30) return 'BRONZE';
+            return 'SEEDLING';
+        }
+
+        function getOverallStats() {
+            let total = 0, done = 0;
+            state.sections.forEach(sec => {
+                total += sec.items.length;
+                done += sec.items.filter(it => it.done).length;
+            });
+            const open = total - done;
+            const pct = total ? Math.round(done * 100 / total) : 0;
+            return { total, done, open, pct, level: getMaturityText(pct) };
+        }
+
+        function copyExecutiveSummary() {
+            const stats = getOverallStats();
+            let summary = `iO Project Maturity Tracker | Status: ${stats.level} (${stats.pct}%) | ${stats.open} Open Deliverables\n\n`;
+
+            let upcoming = [];
+            state.sections.forEach(sec => {
+                sec.items.forEach(it => {
+                    if (!it.done && it.due) upcoming.push(it);
+                });
+            });
+            upcoming.sort((a, b) => new Date(a.due) - new Date(b.due));
+
+            if (upcoming.length > 0) {
+                summary += `Next Due:\n`;
+                upcoming.slice(0, 3).forEach(it => {
+                    summary += `- ${it.title} (${it.due})\n`;
+                });
+            }
+
+            navigator.clipboard.writeText(summary).then(() => alert('Executive Summary copied to clipboard!'));
+        }
+
+        function exportToAI() {
+            const stats = getOverallStats();
+            let md = `# Project State: ${stats.level} (${stats.pct}%)\nTotal: ${stats.total}, Done: ${stats.done}, Open: ${stats.open}\n\n`;
+
+            state.sections.forEach(sec => {
+                md += `## ${sec.name}\n`;
+                sec.items.forEach(it => {
+                    md += `- [${it.done ? 'x' : ' '}] ${it.title}\n`;
+                    if (it.owner) md += `  - Owner: ${it.owner}\n`;
+                    if (it.due) md += `  - Due: ${it.due}\n`;
+                    if (it.notes) md += `  - Notes: ${it.notes}\n`;
+                });
+                md += '\n';
+            });
+
+            download('ai-context.md', md, 'text/markdown');
+        }
+
+        render();
+    </script>
+</body>
+
+</html>
